@@ -1,4 +1,4 @@
-console.log('[PromptGuard] Content script loaded');
+console.log('[LassoGuard] Content script loaded');
 chrome.storage.local.set({ issues: [] });
 
 // Injectează scriptul în MAIN world
@@ -23,7 +23,7 @@ window.addEventListener('message', async (event) => {
 
     // ✅ Verifică dacă extensia e validă
     if (!isExtensionValid()) {
-        console.warn('[PromptGuard] Extension context invalidated, please refresh the page');
+        console.warn('[LassoGuard] Extension context invalidated, please refresh the page');
         window.postMessage(
             {
                 type: 'PROMPT_GUARD_RESPONSE',
@@ -56,9 +56,9 @@ window.addEventListener('message', async (event) => {
     } catch (error) {
         // ✅ Handle "Extension context invalidated" specific
         if (error.message?.includes('Extension context invalidated')) {
-            console.warn('[PromptGuard] Extension was reloaded, please refresh the page');
+            console.warn('[LassoGuard] Extension was reloaded, please refresh the page');
         } else {
-            console.error('[PromptGuard] Content script error:', error);
+            console.error('[LassoGuard] Content script error:', error);
         }
 
         window.postMessage(

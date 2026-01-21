@@ -78,7 +78,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         onPromptSubmit(message.payload)
             .then(result => sendResponse(result))
             .catch(err => {
-                console.error('[PromptGuard] Error:', err);
+                console.error('[LassoGuard] Error:', err);
                 sendResponse({
                     hasIssues: false,
                     anonymizedText: message.payload,
@@ -95,7 +95,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         await chrome.storage.local.set({ history: [] });
     }
     await chrome.storage.local.set({ issues: [] });
-    console.log('[PromptGuard] Service worker installed');
+    console.log('[LassoGuard] Service worker installed');
 });
 
 
@@ -116,7 +116,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
                 chrome.action.setBadgeBackgroundColor({ color: '#FF6B00' });
 
                 console.log(
-                    '[PromptGuard] New issues detected:',
+                    '[LassoGuard] New issues detected:',
                     added.length
                 );
             }
@@ -139,4 +139,4 @@ async function isGuardDismissed() {
     return true;
 }
 
-console.log('[PromptGuard] Service worker ready');
+console.log('[LassoGuard] Service worker ready');

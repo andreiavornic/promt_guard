@@ -60,7 +60,7 @@
                 return originalFetch.call(this, newRequest);
             }
         } catch (e) {
-            console.warn('[PromptGuard] interception error:', e);
+            console.warn('[LassoGuard] interception error:', e);
         }
 
         return originalFetch.apply(this, args);
