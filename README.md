@@ -1,4 +1,4 @@
-# Prompt Guard
+# Lasso Guard
 
 A browser extension that protects users from accidentally leaking sensitive data into AI prompts. It detects email addresses in real time, anonymizes them, and alerts the user before submission.
 
