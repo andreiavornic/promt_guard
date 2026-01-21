@@ -1,0 +1,11 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-bg-secondary);
+}
+
+.main {
+   padding: var(--spacing-lg);
+}

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .info-block {
+    text-align: center;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    background: radial-gradient(circle at 50% 0%, #D6F6E1 50%, var(--color-bg-secondary) 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    color: var(--color-text-secondary);
+
+    .icon {
+      font-size: var(--font-size-xxl);
+      height: var(--font-size-xxl);
+    }
+
+    h4 {
+      font-size: var(--font-size-base);
+      height: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    p {
+      font-size: var(--font-size-sm);
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: solid 2px var(--color-bg-secondary);
+
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    .logo {
+      font-size: var(--font-size-xxl);
+      height: var(--font-size-xxl);
+      line-height: var(--font-size-xxl);
+    }
+
+    .name {
+      h1 {
+        font-size: var(--font-size-medium);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-secondary);
+      }
+
+      p {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+    }
+
+    .spacer {
+      flex: 1;
+    }
+  }
+
+}

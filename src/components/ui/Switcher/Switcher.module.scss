@@ -1,0 +1,42 @@
+button {
+  &.switcher {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: transparent;
+
+    .item {
+      font-size: var(--font-size-xxs);
+      color: var(--color-gray-70);
+      text-decoration: none;
+    }
+
+    .radio {
+      width: var(--spacing-xl);
+      height: var(--spacing-md);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      position: relative;
+      &.disabled {
+        &:before {
+          left: -1px;
+          background: var(--color-toggle-expiring);
+        }
+      }
+      &:before {
+        width: var(--spacing-md);
+        height: var(--spacing-md);
+        border-radius: 50%;
+        background: var(--color-toggle-active);
+        display: block;
+        position: absolute;
+        content: "";
+        top: -1px;
+        left: calc(100% - var(--spacing-md) + 1px);
+      }
+    }
+  }
+
+}
