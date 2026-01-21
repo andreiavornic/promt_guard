@@ -1,0 +1,19 @@
+.issues-block {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  padding: 0 var(--spacing-lg);
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-blue-15);
+    border-radius: 1px;
+  }
+}

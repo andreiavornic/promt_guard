@@ -1,28 +1,63 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 interface DismissState {
-    dismissed: Record<string, number>;
+    dismissed: boolean;
+    timer: number | null;
+    loaded: boolean;
 }
 
 const initialState: DismissState = {
-    dismissed: {},
+    dismissed: false,
+    timer: null,
+    loaded: false
 };
+
+export const loadDismissState = createAsyncThunk(
+    'dismiss/loadState',
+    async () => {
+        const result = await chrome.storage.local.get(['guardDismissed', 'guardDismissUntil']);
+        return {
+            dismissed: result.guardDismissed ?? false,
+            timer: result.guardDismissUntil ?? null
+        };
+    }
+);
 
 const dismissSlice = createSlice({
     name: 'dismiss',
     initialState,
     reducers: {
-        dismissEmail(
-            state,
-            action: PayloadAction<{ email: string; until: number }>
-        ) {
-            state.dismissed[action.payload.email] = action.payload.until;
+        dismissGuard(state) {
+            const expireTime = Date.now() + 24 * 60 * 60 * 1000;
+            state.dismissed = true;
+            state.timer = expireTime;
+            chrome.storage.local.set({
+                guardDismissed: true,
+                guardDismissUntil: expireTime
+            });
         },
-        clearDismiss(state, action: PayloadAction<string>) {
-            delete state.dismissed[action.payload];
+        activateGuard(state) {
+            state.dismissed = false;
+            state.timer = null;
+            chrome.storage.local.remove(['guardDismissed', 'guardDismissUntil']);
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(loadDismissState.fulfilled, (state, action) => {
+            const { dismissed, timer } = action.payload;
+
+            if (timer && Date.now() >= timer) {
+                state.dismissed = false;
+                state.timer = null;
+                chrome.storage.local.remove(['guardDismissed', 'guardDismissUntil']);
+            } else {
+                state.dismissed = dismissed;
+                state.timer = timer;
+            }
+            state.loaded = true;
+        });
+    }
 });
 
-export const { dismissEmail, clearDismiss } = dismissSlice.actions;
+export const { dismissGuard, activateGuard } = dismissSlice.actions;
 export default dismissSlice.reducer;

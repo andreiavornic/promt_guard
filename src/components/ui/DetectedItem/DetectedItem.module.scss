@@ -1,0 +1,17 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: solid 2px var(--color-bg-secondary);
+
+  .email {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .date {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-70);
+  }
+}
